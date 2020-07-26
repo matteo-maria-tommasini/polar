@@ -1,0 +1,31 @@
+la = 5 
+lb = 3
+set terminal pdfcairo dashed color enhanced size la,lb font "Helvetica,12"
+set size ratio lb/la
+set multiplot layout 2,1
+set lmargin at screen 0.1
+set rmargin at screen 0.95
+
+p400='c84-22-D2.polar'
+r400='R-22-D2.dat'
+
+set  ylabel "-(1/3) Re[Tr({/Symbol a}^{em})] (at. un.)"
+
+xa = 300.0
+xb = 700.0
+k = 1240.0
+set arrow from xa,0 to xb,0 lt 8 lw 1 dt "." nohead
+set mxtics 5 
+set xrange [xa:xb]
+set yrange [-90:90]
+set ytics 25 
+set y2range [-500:500]
+set format y2 ""
+set ytics nomirror
+
+set key top left
+plot [xa:xb]\
+    p400 u (k/$1):(-$4) axis x1y1 t "C84" w l lt 1 lw 2 dt 1, \
+    r400 u (k/$3):( $9) axis x1y2 t ""    w i lt 1 lw 1 dt 1
+
+
