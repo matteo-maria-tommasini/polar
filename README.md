@@ -5,7 +5,11 @@
 
  Polar results were assessed by the authors of the cited paper [1]. Unfortunately, due to development time restrictions, the source code is scarcely commented and documented. Potential users of the code can examine the test directory for examples of calculations. Furthermore, I can be contacted for details (my address can be found in [1]). I am open to collaboration to document the code and improve its readability.
 
- Matteo Tommasini, Verna d'Intelvi (Jul 25 2020)
+
+
+Matteo Tommasini, Verna d'Intelvi (Jul 25 2020)
+
+
 
 Reference
 
