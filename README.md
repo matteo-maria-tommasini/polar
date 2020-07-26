@@ -4,8 +4,8 @@
  The polar code was written by Matteo Tommasini and was instrumental to carry out the calculations described in [1], where the role of molecular polarizability is investigated in the context of electronic and vibrational circular dichroism spectroscopies.
 
  Polar results were assessed by the authors of the cited paper [1]. Unfortunately, due to development time restrictions, the source code is scarcely commented and documented. Potential users of the code can examine the test directory for examples of calculations. Furthermore, I can be contacted for details (my address can be found in [1]). I am open to collaboration to add documentation and improve the code readability.
-
-
+ 
+The code is written in C++11, makes use of the eigen3 library, and it has been developed by using clang in a macOS environment.
 
 Matteo Tommasini
 
