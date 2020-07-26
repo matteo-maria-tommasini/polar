@@ -8,5 +8,6 @@
  Matteo Tommasini, Verna d'Intelvi (Jul 25 2020)
 
 Reference
+
 [1] Evaluation of Molecular Polarizability and of Intensity Carrying Modes Contributions in Circular Dichroism Spectroscopies, by Chiara Zanchi, Giovanna Longhi, Sergio Abbate, Giovanni Pellegrini, Paolo Biagioni and Matteo Tommasini, Appl. Sci. 2019, 9, 4691; doi:10.3390/app9214691
 
