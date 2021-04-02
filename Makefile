@@ -7,7 +7,7 @@ ifeq ($(shell uname),Linux)
    LIB=
 endif
 ifeq ($(shell uname),Darwin)
-   CC=clang++-mp-9.0
+   CC=clang++-mp-11
 #   CC=g++
    OPT=-Wall -std=c++11 -O3 -march=native -I/opt/local/include/ -I/opt/local/include/eigen3/
    LIB=
