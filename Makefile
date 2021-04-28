@@ -7,8 +7,8 @@ ifeq ($(shell uname),Linux)
    LIB=
 endif
 ifeq ($(shell uname),Darwin)
-   CC=clang++-mp-11
-#   CC=g++
+#   CC=clang++-mp-11
+   CC=clang++
    OPT=-Wall -std=c++11 -O3 -march=native -I/opt/local/include/ -I/opt/local/include/eigen3/
    LIB=
 endif
@@ -28,3 +28,5 @@ clean:
 distclean: clean
 	rm -rf polar.x
 
+remake:
+	make distclean; make -j 20
