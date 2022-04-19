@@ -106,8 +106,8 @@ void DissimmetryFactors::Print() const
    /////////////////
    // HEADER ends //
    /////////////////
-   auto N = this->g.size();
-   for (auto i=0; i < N; ++i)
+   auto Ng = this->g.size();
+   for (auto i=0; i < Ng; ++i)
    {
       std::vector<double> values;
 
