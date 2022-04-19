@@ -46,7 +46,7 @@ void ICM::PrintReport() const
       }
       std::cout << "VCD sum of lambdas = " << sum << std::endl; 
       double trace = 0.0;
-      for (int i = 0; i<this->ICM_intensity.size(); ++i)
+      for (auto i = 0; i<N; ++i)
       {
          trace += ICM_intensity(i);
       }
@@ -56,7 +56,8 @@ void ICM::PrintReport() const
    {
       int idx = 1;
       double sum = 0.0;
-      for (int i = 0; i<this->ICM_intensity.size(); ++i)
+      auto N = this->ICM_intensity.size();
+      for (auto i = 0; i < N; ++i)
       {
          if (abs(ICM_intensity(i)) > 1.0e-6) 
          {
@@ -67,7 +68,7 @@ void ICM::PrintReport() const
       }
       std::cout << "IR sum of lambdas = " << sum << std::endl; 
       double trace = 0.0;
-      for (int i = 0; i<this->ICM_intensity.size(); ++i)
+      for (auto i = 0; i < N; ++i)
       {
          trace += ICM_intensity(i);
       }
@@ -77,7 +78,8 @@ void ICM::PrintReport() const
    {
       int idx = 1;
       double sum = 0.0;
-      for (int i = 0; i<this->ICM_intensity.size(); ++i)
+      auto N = this->ICM_intensity.size();
+      for (auto i = 0; i < N; ++i)
       {
          if (abs(ICM_intensity(i)) > 1.0e-6) 
          {
@@ -88,7 +90,7 @@ void ICM::PrintReport() const
       }
       std::cout << "MAG sum of lambdas = " << sum << std::endl; 
       double trace = 0.0;
-      for (int i = 0; i<this->ICM_intensity.size(); ++i)
+      for (auto i = 0; i < N; ++i)
       {
          trace += ICM_intensity(i);
       }
