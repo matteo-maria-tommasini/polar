@@ -89,12 +89,13 @@ void DissimmetryFactors::Print() const
    labels.push_back("dipole strengths       ( D0k x 1E4,  atomic units )");
    labels.push_back("rotatory strengths     ( R0k x 1E7,  atomic units )");
    labels.push_back("dissimmetry factors    (   g x 1E4, dimensionless )");
-   for (int i=0; i<labels.size(); ++i)
+   auto N = labels.size();
+   for (auto i=0; i < N; ++i)
    {
       std::cout << "(" << i+1 << ") " << labels[i] << std::endl; 
    }
    std::cout << BAR << std::endl;
-   for (int i=0; i<labels.size(); ++i)
+   for (auto i=0; i<N; ++i)
    {
       std::cout << std::fixed << std::setfill(' ') 
                 << std::setw(10) << std::setprecision(2)
@@ -105,8 +106,8 @@ void DissimmetryFactors::Print() const
    /////////////////
    // HEADER ends //
    /////////////////
-   
-   for (int i=0; i < this->g.size(); ++i)
+   auto N = this->g.size();
+   for (auto i=0; i < N; ++i)
    {
       std::vector<double> values;
 
@@ -123,8 +124,9 @@ void DissimmetryFactors::Print() const
       // print the data row relative to the i-th mode //
       //////////////////////////////////////////////////
       
-      // print numerical data              
-      for (int k=0; k<values.size(); ++k)
+      // print numerical data
+      auto Nval = values.size();
+      for (auto k=0; k < Nval; ++k)
       {
          std::cout << std::fixed << std::setfill(' ') 
                    << std::setw(10) << std::setprecision(2)
