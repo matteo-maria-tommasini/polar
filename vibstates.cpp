@@ -78,7 +78,7 @@ void VibStates::PrintReport() const
    labels.push_back("                                                 (z)  (e**3 / (k0 * hbar amu**0.5))");
 
    {
-      auto i, Nlabels = labels.size();
+      auto i = Nlabels = labels.size();
       for (i=0; i<Nlabels; ++i)
       {
          std::cout << "(" << i+1 << ") " << labels[i] << std::endl; 
