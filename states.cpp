@@ -49,7 +49,7 @@ void States::DestroyLastNstates(const int N)
    int N0 = this->el_dipole.size();
    Eigen::VectorXd resized_energy = this->energy.head(N0-N);
    this->energy = resized_energy;
-   for (unsigned int i = 0; i<N; ++i)
+   for (int i = 0; i<N; ++i)
    {
      this->el_dipole.pop_back();
      this->mag_dipole.pop_back();
@@ -136,7 +136,7 @@ States::States(const std::string& filename)
         if (line.find("Ground to excited state transition magnetic dipole moments (Au):") != std::string::npos)
         {
            std::getline(infile, line); // this line is skipped
-           for (unsigned int i=0; i<number_of_states; ++i)
+           for (int i=0; i<number_of_states; ++i)
            {
               std::getline(infile, line);
 

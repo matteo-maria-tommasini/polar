@@ -164,7 +164,7 @@ Eigen::MatrixXi GaussianFCHK::ReadAtomicNumbers() const
          if (line.find(ATOMIC_NUMBERS_KEY) != std::string::npos) 
          {
             std::vector<double> Z_v = readitems<double>(infile, N);
-            for (unsigned int i=0; i<N; ++i) Z(i) = Z_v[i];
+            for (int i=0; i<N; ++i) Z(i) = Z_v[i];
             std::cout << ATOMIC_NUMBERS_MSG << std::endl;
          }
       }
@@ -195,7 +195,7 @@ Eigen::MatrixXd GaussianFCHK::ReadAtomicMasses() const
          if (line.find(ATOMIC_MASSES_KEY) != std::string::npos) 
          {
             std::vector<double> masses_v = readitems<double>(infile, N);
-            for (unsigned int i=0; i<N; ++i) masses(i) = masses_v[i];
+            for (int i=0; i<N; ++i) masses(i) = masses_v[i];
             std::cout << ATOMIC_MASSES_MSG << std::endl;
          }
       }
@@ -227,7 +227,7 @@ Eigen::MatrixXd GaussianFCHK::ReadCartesianCoordinates() const
          if (line.find(CARTESIAN_COORDINATES_KEY) != std::string::npos) 
          {
             std::vector<double> coord_v = readitems<double>(infile, 3*N);
-            for (unsigned int i=0; i < N; ++i) 
+            for (int i=0; i < N; ++i) 
             {
                X(0,i) = coord_v[3*i + 0];
                X(1,i) = coord_v[3*i + 1];
@@ -263,7 +263,7 @@ Eigen::MatrixXd GaussianFCHK::ReadElectricDipoleDerivatives() const
          if (line.find(ELECTRIC_DIPOLE_DERIVATIVES_KEY) != std::string::npos) 
          {
             std::vector<double> dmu_v = readitems<double>(infile, 3*(3*N));
-            for (unsigned int i=0; i < 3*N; ++i) 
+            for (int i=0; i < 3*N; ++i) 
             {
                dmu(0,i) = dmu_v[3*i + 0];
                dmu(1,i) = dmu_v[3*i + 1];
