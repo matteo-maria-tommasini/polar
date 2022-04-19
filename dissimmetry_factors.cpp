@@ -129,7 +129,7 @@ void DissimmetryFactors::Print() const
          
          // print numerical data
          auto Nval = values.size(), k = Nval;
-         for (auto k=0; k < Nval; ++k)
+         for (k = 0; k < Nval; ++k)
          {
             std::cout << std::fixed << std::setfill(' ') 
                       << std::setw(10) << std::setprecision(2)
