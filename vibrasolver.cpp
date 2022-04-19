@@ -193,37 +193,40 @@ Eigen::VectorXd VibraSolver::Get_mu01_Robust() const
 {
    return(this->mu01_robust);
 }
+
 ////////////////////////
 // main output method //
 ////////////////////////
 void VibraSolver::PrintReport() const
 {
-   const int N3 = this->wavenumbers.size();
-
-   /////////////////
+   ///////////////////
    // HEADER begins //
-   /////////////////
+   ///////////////////
    std::cout << BAR << std::endl;
-   std::cout << "Number of Cartesian degrees of freedom (3N): " << N3 << std::endl;
-   std::cout << "3N-6 = " << N3-6 << std::endl;
+   std::cout << "Number of Cartesian degrees of freedom (3N): " 
+             << this->wavenumbers.size() << std::endl;
+   std::cout << "3N-6 = " 
+             << this->wavenumbers.size() - 6 << std::endl;
    std::cout << BAR << std::endl;
 
    std::vector<std::string> labels;
-   std::vector<double> values;
                          labels.push_back("wavenumber, 1/cm");
    if (this->has_IR)     labels.push_back("IR intensity, km/mol");
    if (this->has_VCD)    labels.push_back("VCD intensity (rotatory strength), 1.0e-44 esu**2 cm**2");
    
-   for (int i=0; i<labels.size(); ++i)
    {
-      std::cout << "(" << i+1 << ") " << labels[i] << std::endl; 
-   }
-   std::cout << BAR << std::endl;
+      auto N = labels.size(), i = N;
+      for (i=0; i<labels.size(); ++i)
+      {
+         std::cout << "(" << i+1 << ") " << labels[i] << std::endl; 
+      }
+      std::cout << BAR << std::endl;
 
-   for (int i=0; i<labels.size(); ++i)
-   {
-      std::cout << std::fixed << std::setfill(' ') << std::setw(10) << std::setprecision(2)
-                << i+1;
+      for (i=0; i<labels.size(); ++i)
+      {
+         std::cout << std::fixed << std::setfill(' ') << std::setw(10) << std::setprecision(2)
+                   << i+1;
+      }
    }
    std::cout << std::endl;
    std::cout << BAR << std::endl;
@@ -234,27 +237,32 @@ void VibraSolver::PrintReport() const
    ///////////////////////////////////
    // print data rows, mode by mode //
    ///////////////////////////////////
-   for (int i=0; i<N3; ++i)
    {
-                            values.push_back(this->wavenumbers(i));
-      if (this->has_IR)     values.push_back(this->IR_intensities(i));
-      if (this->has_VCD)    values.push_back(this->VCD_intensities(i) * 1.0e44);
-      
-      // final printout
-      for (int k=0; k<values.size(); ++k)
+      std::vector<double> values;
+      auto N3 = this->wavenumbers.size(), i = N3;
+      auto Nval = values.size(), k = Nval;
+      for (i=0; i<N3; ++i)
       {
-         std::cout << std::fixed << std::setfill(' ') << std::setw(10) << std::setprecision(2)
-                   << values[k];
+                               values.push_back(this->wavenumbers(i));
+         if (this->has_IR)     values.push_back(this->IR_intensities(i));
+         if (this->has_VCD)    values.push_back(this->VCD_intensities(i) * 1.0e44);
+         
+         // final printout
+         for (k=0; k<Nval; ++k)
+         {
+            std::cout << std::fixed << std::setfill(' ') << std::setw(10) << std::setprecision(2)
+                      << values[k];
+         }
+         std::cout 
+                   << std::fixed << std::setfill(' ') << std::setw(6) 
+                   << "MODE" 
+                   << std::fixed << std::setfill(' ') << std::setw(5) 
+                   << (i+1)                           
+                   << std::endl;
+
+         values.clear();
       }
-      std::cout 
-                << std::fixed << std::setfill(' ') << std::setw(6) 
-                << "MODE" 
-                << std::fixed << std::setfill(' ') << std::setw(5) 
-                << (i+1)                           
-                << std::endl;
-
-      values.clear();
-
    }
+
 }
 
