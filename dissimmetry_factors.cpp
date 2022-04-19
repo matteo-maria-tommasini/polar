@@ -89,58 +89,63 @@ void DissimmetryFactors::Print() const
    labels.push_back("dipole strengths       ( D0k x 1E4,  atomic units )");
    labels.push_back("rotatory strengths     ( R0k x 1E7,  atomic units )");
    labels.push_back("dissimmetry factors    (   g x 1E4, dimensionless )");
-   auto N = labels.size();
-   for (auto i=0; i < N; ++i)
    {
-      std::cout << "(" << i+1 << ") " << labels[i] << std::endl; 
-   }
-   std::cout << BAR << std::endl;
-   for (auto i=0; i<N; ++i)
-   {
-      std::cout << std::fixed << std::setfill(' ') 
-                << std::setw(10) << std::setprecision(2)
-                << i+1;
-   }
-   std::cout << std::endl;
-   std::cout << BAR << std::endl;
-   /////////////////
-   // HEADER ends //
-   /////////////////
-   auto Ng = this->g.size();
-   for (auto i=0; i < Ng; ++i)
-   {
-      std::vector<double> values;
-
-      const double d_mul = 1.0e4; 
-      const double r_mul = 1.0e7; 
-      const double g_mul = 1.0e4;
-
-      values.push_back(this->wavenumbers(i));
-      values.push_back(this->dipole_strength(i) * d_mul);
-      values.push_back(this->rotatory_strength(i) * r_mul);
-      values.push_back(this->g(i) * g_mul);
-
-      //////////////////////////////////////////////////
-      // print the data row relative to the i-th mode //
-      //////////////////////////////////////////////////
-      
-      // print numerical data
-      auto Nval = values.size();
-      for (auto k=0; k < Nval; ++k)
+      auto N = labels.size(), i = N;
+      for (i=0; i < N; ++i)
+      {
+         std::cout << "(" << i+1 << ") " << labels[i] << std::endl; 
+      }
+      std::cout << BAR << std::endl;
+      for (i=0; i<N; ++i)
       {
          std::cout << std::fixed << std::setfill(' ') 
                    << std::setw(10) << std::setprecision(2)
-                   << values[k];
+                   << i+1;
       }
-      // end of the data row (just to be grep-friendly)
-      std::cout 
-                << std::fixed << std::setfill(' ') << std::setw(6) 
-                << " (g)  MODE" 
-                << std::fixed << std::setfill(' ') << std::setw(5) 
-                << (i+1)                           
-                << std::endl;
-      values.clear();
-    }
+      std::cout << std::endl;
+      std::cout << BAR << std::endl;
+   }
+   /////////////////
+   // HEADER ends //
+   /////////////////
+   {
+      auto Ng = this->g.size(), i = Ng;
+      for (i = 0; i < Ng; ++i)
+      {
+         std::vector<double> values;
+
+         const double d_mul = 1.0e4; 
+         const double r_mul = 1.0e7; 
+         const double g_mul = 1.0e4;
+
+         values.push_back(this->wavenumbers(i));
+         values.push_back(this->dipole_strength(i) * d_mul);
+         values.push_back(this->rotatory_strength(i) * r_mul);
+         values.push_back(this->g(i) * g_mul);
+
+         //////////////////////////////////////////////////
+         // print the data row relative to the i-th mode //
+         //////////////////////////////////////////////////
+         
+         // print numerical data
+         auto Nval = values.size(), k = Nval;
+         for (auto k=0; k < Nval; ++k)
+         {
+            std::cout << std::fixed << std::setfill(' ') 
+                      << std::setw(10) << std::setprecision(2)
+                      << values[k];
+         }
+         // end of the data row (just to be grep-friendly)
+         std::cout 
+                   << std::fixed << std::setfill(' ') << std::setw(6) 
+                   << " (g)  MODE" 
+                   << std::fixed << std::setfill(' ') << std::setw(5) 
+                   << (i+1)                           
+                   << std::endl;
+         values.clear();
+       }
+   }
+   
 
 }
 
