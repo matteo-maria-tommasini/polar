@@ -101,36 +101,39 @@ void VibStates::PrintReport() const
    ///////////////////////////////////
    // print data rows, mode by mode //
    ///////////////////////////////////
-   std::vector<double> values;
-   auto N3 = this->wavenumbers.size();
-   for (auto i = 0; i < N3; ++i)
    {
-      values.push_back(this->wavenumbers(i));
-
-      values.push_back(this->dmu_dq[i](0));
-      values.push_back(this->dmu_dq[i](1));
-      values.push_back(this->dmu_dq[i](2));
-
-      values.push_back(this->dm_dqdot[i](0));
-      values.push_back(this->dm_dqdot[i](1));
-      values.push_back(this->dm_dqdot[i](2));
-
-      // final printout
-      auto Nval = values.size();
-      for (auto k = 0; k < Nval; ++k)
+      std::vector<double> values;
+      auto N3 = this->wavenumbers.size(), i = N3;
+      for (i = 0; i < N3; ++i)
       {
-         std::cout << std::fixed << std::setfill(' ') 
-                   << std::setw(10) << std::setprecision(2)
-                   << values[k];
-      }
-      std::cout << std::fixed << std::setfill(' ') << std::setw(6) 
-                << "MODE" 
-                << std::fixed << std::setfill(' ') << std::setw(5) 
-                << (i+1)                           
-                << std::endl;
+         values.push_back(this->wavenumbers(i));
 
-      values.clear();
-    }
+         values.push_back(this->dmu_dq[i](0));
+         values.push_back(this->dmu_dq[i](1));
+         values.push_back(this->dmu_dq[i](2));
+
+         values.push_back(this->dm_dqdot[i](0));
+         values.push_back(this->dm_dqdot[i](1));
+         values.push_back(this->dm_dqdot[i](2));
+
+         // final printout
+         auto Nval = values.size(), k = Nval;
+         for (k = 0; k < Nval; ++k)
+         {
+            std::cout << std::fixed << std::setfill(' ') 
+                      << std::setw(10) << std::setprecision(2)
+                      << values[k];
+         }
+         std::cout << std::fixed << std::setfill(' ') << std::setw(6) 
+                   << "MODE" 
+                   << std::fixed << std::setfill(' ') << std::setw(5) 
+                   << (i+1)                           
+                   << std::endl;
+
+         values.clear();
+       }
+   }
+  
 }
 
 VibStates::VibStates(const std::string& filename)
