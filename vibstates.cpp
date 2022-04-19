@@ -61,7 +61,7 @@ Eigen::VectorXd VibStates::Get_mu01_Robust() const
 
 void VibStates::PrintReport() const
 {
-   const int N3 = this->wavenumbers.size();
+   auto N3 = this->wavenumbers.size();
 
    ///////////////////
    // HEADER begins //
@@ -79,13 +79,14 @@ void VibStates::PrintReport() const
    labels.push_back("                                                 (y)  (e**3 / (k0 * hbar amu**0.5))");
    labels.push_back("                                                 (z)  (e**3 / (k0 * hbar amu**0.5))");
 
-   for (int i=0; i<labels.size(); ++i)
+   auto Nlabels = labels.size();
+   for (auto i=0; i<Nlabels; ++i)
    {
       std::cout << "(" << i+1 << ") " << labels[i] << std::endl; 
    }
    std::cout << BAR << std::endl;
 
-   for (int i=0; i<labels.size(); ++i)
+   for (auto i=0; i<Nlabels; ++i)
    {
       std::cout << std::fixed << std::setfill(' ') 
                 << std::setw(10) << std::setprecision(2)
@@ -101,7 +102,7 @@ void VibStates::PrintReport() const
    // print data rows, mode by mode //
    ///////////////////////////////////
    std::vector<double> values;
-   for (int i=0; i<N3; ++i)
+   for (auto i = 0; i < N3; ++i)
    {
       values.push_back(this->wavenumbers(i));
 
@@ -114,7 +115,8 @@ void VibStates::PrintReport() const
       values.push_back(this->dm_dqdot[i](2));
 
       // final printout
-      for (int k=0; k<values.size(); ++k)
+      auto Nval = values.size();
+      for (auto k = 0; k < Nval; ++k)
       {
          std::cout << std::fixed << std::setfill(' ') 
                    << std::setw(10) << std::setprecision(2)
