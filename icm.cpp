@@ -34,7 +34,8 @@ void ICM::PrintReport() const
    {
       int idx = 1;
       double sum = 0.0;
-      for (int i = 0; i<this->ICM_intensity.size(); ++i)
+      auto N = this->ICM_intensity.size();
+      for (auto i = 0; i < N; ++i)
       {
          if (abs(ICM_intensity(i)) > 1.0e-6) 
          {
