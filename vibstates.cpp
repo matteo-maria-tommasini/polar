@@ -61,13 +61,11 @@ Eigen::VectorXd VibStates::Get_mu01_Robust() const
 
 void VibStates::PrintReport() const
 {
-   auto N3 = this->wavenumbers.size();
-
    ///////////////////
    // HEADER begins //
    ///////////////////
    std::cout << BAR << std::endl;
-   std::cout << "Set of " << N3 << " vibrational states (including rototranslations)" << std::endl;
+   std::cout << "Set of " << this->wavenumbers.size() << " vibrational states (including rototranslations)" << std::endl;
    std::cout << BAR << std::endl;
 
    std::vector<std::string> labels;
@@ -79,21 +77,23 @@ void VibStates::PrintReport() const
    labels.push_back("                                                 (y)  (e**3 / (k0 * hbar amu**0.5))");
    labels.push_back("                                                 (z)  (e**3 / (k0 * hbar amu**0.5))");
 
-   auto Nlabels = labels.size();
-   for (auto i=0; i<Nlabels; ++i)
    {
-      std::cout << "(" << i+1 << ") " << labels[i] << std::endl; 
-   }
-   std::cout << BAR << std::endl;
+      auto i, Nlabels = labels.size();
+      for (i=0; i<Nlabels; ++i)
+      {
+         std::cout << "(" << i+1 << ") " << labels[i] << std::endl; 
+      }
+      std::cout << BAR << std::endl;
 
-   for (auto i=0; i<Nlabels; ++i)
-   {
-      std::cout << std::fixed << std::setfill(' ') 
-                << std::setw(10) << std::setprecision(2)
-                << i+1;
+      for (i=0; i<Nlabels; ++i)
+      {
+         std::cout << std::fixed << std::setfill(' ') 
+                   << std::setw(10) << std::setprecision(2)
+                   << i+1;
+      }
+      std::cout << std::endl;
+      std::cout << BAR << std::endl;
    }
-   std::cout << std::endl;
-   std::cout << BAR << std::endl;
    /////////////////
    // HEADER ends //
    /////////////////
@@ -102,6 +102,7 @@ void VibStates::PrintReport() const
    // print data rows, mode by mode //
    ///////////////////////////////////
    std::vector<double> values;
+   auto N3 = this->wavenumbers.size();
    for (auto i = 0; i < N3; ++i)
    {
       values.push_back(this->wavenumbers(i));
