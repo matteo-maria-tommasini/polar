@@ -125,9 +125,9 @@ Eigen::MatrixXd GaussianFCHK::ReadHessian() const
 
             std::vector<double> hessian_v = readitems<double>(infile, number_of_items);
 
-            for (unsigned int i=0; i<3*this->Number_of_atoms; ++i) 
+            for (int i=0; i<3*this->Number_of_atoms; ++i) 
             {
-               for (unsigned int j=i; j<3*this->Number_of_atoms; ++j) 
+               for (int j=i; j<3*this->Number_of_atoms; ++j) 
                {
                   H(i,j) = hessian_v[PACKIDX(i,j)];
                   H(j,i) = H(i,j); 
@@ -299,7 +299,7 @@ Eigen::MatrixXd GaussianFCHK::ReadMagneticDipoleDerivatives() const
          if (line.find(MAGNETIC_DIPOLE_DERIVATIVES_KEY) != std::string::npos) 
          {
             std::vector<double> dm_v = readitems<double>(infile, 3*(3*N));
-            for (unsigned int i=0; i < 3*N; ++i) 
+            for (int i=0; i < 3*N; ++i) 
             {
 	            // the factor 2.0 is required to interpret Gaussian AATs 
                // as magnetic dipole derivatives vs. cartesian nuclear velocities 

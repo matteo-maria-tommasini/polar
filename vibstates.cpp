@@ -29,7 +29,7 @@
 #include "macros.hpp"
 #include <iomanip>
 
-unsigned int VibStates::GetNumberOfStates() const
+int VibStates::GetNumberOfStates() const
 {
    return(this->wavenumbers.size());
 }
@@ -79,13 +79,13 @@ void VibStates::PrintReport() const
    labels.push_back("                                                 (y)  (e**3 / (k0 * hbar amu**0.5))");
    labels.push_back("                                                 (z)  (e**3 / (k0 * hbar amu**0.5))");
 
-   for (unsigned int i=0; i<labels.size(); ++i)
+   for (int i=0; i<labels.size(); ++i)
    {
       std::cout << "(" << i+1 << ") " << labels[i] << std::endl; 
    }
    std::cout << BAR << std::endl;
 
-   for (unsigned int i=0; i<labels.size(); ++i)
+   for (int i=0; i<labels.size(); ++i)
    {
       std::cout << std::fixed << std::setfill(' ') 
                 << std::setw(10) << std::setprecision(2)
@@ -101,7 +101,7 @@ void VibStates::PrintReport() const
    // print data rows, mode by mode //
    ///////////////////////////////////
    std::vector<double> values;
-   for (unsigned int i=0; i<N3; ++i)
+   for (int i=0; i<N3; ++i)
    {
       values.push_back(this->wavenumbers(i));
 
@@ -114,7 +114,7 @@ void VibStates::PrintReport() const
       values.push_back(this->dm_dqdot[i](2));
 
       // final printout
-      for (unsigned int k=0; k<values.size(); ++k)
+      for (int k=0; k<values.size(); ++k)
       {
          std::cout << std::fixed << std::setfill(' ') 
                    << std::setw(10) << std::setprecision(2)

@@ -32,9 +32,9 @@ void ICM::PrintReport() const
 {
    if (this->has_ICM_VCD)
    {
-      unsigned int idx = 1;
+      int idx = 1;
       double sum = 0.0;
-      for (unsigned int i = 0; i<this->ICM_intensity.size(); ++i)
+      for (int i = 0; i<this->ICM_intensity.size(); ++i)
       {
          if (abs(ICM_intensity(i)) > 1.0e-6) 
          {
@@ -45,7 +45,7 @@ void ICM::PrintReport() const
       }
       std::cout << "VCD sum of lambdas = " << sum << std::endl; 
       double trace = 0.0;
-      for (unsigned int i = 0; i<this->ICM_intensity.size(); ++i)
+      for (int i = 0; i<this->ICM_intensity.size(); ++i)
       {
          trace += ICM_intensity(i);
       }
@@ -53,7 +53,7 @@ void ICM::PrintReport() const
    }
    else if (this->has_ICM_IR)
    {
-      unsigned int idx = 1;
+      int idx = 1;
       double sum = 0.0;
       for (unsigned int i = 0; i<this->ICM_intensity.size(); ++i)
       {
@@ -66,7 +66,7 @@ void ICM::PrintReport() const
       }
       std::cout << "IR sum of lambdas = " << sum << std::endl; 
       double trace = 0.0;
-      for (unsigned int i = 0; i<this->ICM_intensity.size(); ++i)
+      for (int i = 0; i<this->ICM_intensity.size(); ++i)
       {
          trace += ICM_intensity(i);
       }
@@ -74,9 +74,9 @@ void ICM::PrintReport() const
    }
    else if (this->has_ICM_MAG)
    {
-      unsigned int idx = 1;
+      int idx = 1;
       double sum = 0.0;
-      for (unsigned int i = 0; i<this->ICM_intensity.size(); ++i)
+      for (int i = 0; i<this->ICM_intensity.size(); ++i)
       {
          if (abs(ICM_intensity(i)) > 1.0e-6) 
          {
@@ -87,7 +87,7 @@ void ICM::PrintReport() const
       }
       std::cout << "MAG sum of lambdas = " << sum << std::endl; 
       double trace = 0.0;
-      for (unsigned int i = 0; i<this->ICM_intensity.size(); ++i)
+      for (int i = 0; i<this->ICM_intensity.size(); ++i)
       {
          trace += ICM_intensity(i);
       }
@@ -145,11 +145,11 @@ ICM::ICM(const GaussianDataset& gau, const std::string& kind_of_calculation)
 
          // allocate and form the M-matrix
          M = Eigen::MatrixXd::Zero(Nat3,Nat3);
-         for (unsigned int i = 0; i < Nat3; ++i)
+         for (int i = 0; i < Nat3; ++i)
          {
-            for (unsigned int j = 0; j < Nat3; ++j)
+            for (int j = 0; j < Nat3; ++j)
             {
-               for (unsigned int k = 0; k < 3; ++k)
+               for (int k = 0; k < 3; ++k)
                {
                   M(i,j) += 0.5 * (dmu(k,i) * dm(k,j) + dmu(k,j) * dm(k,i));
                }
@@ -171,11 +171,11 @@ ICM::ICM(const GaussianDataset& gau, const std::string& kind_of_calculation)
 
          // allocate and form the M-matrix
          M = Eigen::MatrixXd::Zero(Nat3,Nat3);
-         for (unsigned int i = 0; i < Nat3; ++i)
+         for (int i = 0; i < Nat3; ++i)
          {
-            for (unsigned int j = 0; j < Nat3; ++j)
+            for (int j = 0; j < Nat3; ++j)
             {
-               for (unsigned int k = 0; k < 3; ++k)
+               for (int k = 0; k < 3; ++k)
                {
                   M(i,j) += dm(k,i) * dm(k,j);
                }
@@ -206,7 +206,7 @@ void ICM::Diagonalize(const Eigen::MatrixXd& W,
 
    // Stuff below is done to sort eigen values. This can be done in other ways too.
    std::vector<std::pair<int, int>> eigen_value_index_vector;
-   for (unsigned int i = 0; i < unsorted_eigen_values.size(); ++i)
+   for (int i = 0; i < unsorted_eigen_values.size(); ++i)
    {
        eigen_value_index_vector.push_back( std::make_pair(unsorted_eigen_values[i], i));
    }
@@ -216,7 +216,7 @@ void ICM::Diagonalize(const Eigen::MatrixXd& W,
 
    Eigen::RowVectorXd sorted_eigen_values(unsorted_eigen_values.cols());
    Eigen::MatrixXd sorted_eigen_vectors(unsorted_eigen_vectors.rows(), unsorted_eigen_vectors.cols());
-   for (unsigned int i = 0; i < unsorted_eigen_values.size(); ++i)
+   for (int i = 0; i < unsorted_eigen_values.size(); ++i)
    {
        // can also be eigen_value_index_vector[i].first
        sorted_eigen_values[i] = unsorted_eigen_values[eigen_value_index_vector[i].second];
@@ -285,7 +285,7 @@ void ICM::WriteMolden(const GaussianDataset& gau, const std::string& filename) c
 
    Eigen::MatrixXd coord = gau.GetCartesianCoordinates(); 
    Eigen::MatrixXi atnum = gau.GetAtomicNumbers(); 
-   for (unsigned int i=0; i<Nat; ++i)
+   for (int i=0; i<Nat; ++i)
    {
       // coordinates in angstrom
       std::string symbol = symbtable[(int)atnum(i)-1]; 
@@ -298,21 +298,21 @@ void ICM::WriteMolden(const GaussianDataset& gau, const std::string& filename) c
    }
 
    molden_file << "[FREQ]" << std::endl;
-   for (unsigned int i=0; i < Nmodes; ++i)
+   for (int i=0; i < Nmodes; ++i)
    {
       molden_file << std::fixed << std::setfill(' ') << std::setw(10) << std::setprecision(2) 
              << this->ICM_intensity(i) << std::endl;
    }
 
    molden_file << "[INT]" << std::endl;
-   for (unsigned int i=0; i < Nmodes; ++i)
+   for (int i=0; i < Nmodes; ++i)
    {
       molden_file << std::fixed << std::setfill(' ') << std::setw(10) << std::setprecision(2) 
              << this->ICM_intensity(i) << std::endl;
    }
 
    molden_file << "[FR-COORD]" << std::endl;
-   for (unsigned int i=0; i < Nat; ++i)
+   for (int i=0; i < Nat; ++i)
    {
       std::string symbol = symbtable[(int)atnum(i)-1]; 
       // coordinates in bohr 
@@ -325,10 +325,10 @@ void ICM::WriteMolden(const GaussianDataset& gau, const std::string& filename) c
    }
 
    molden_file << "[FR-NORM-COORD]" << std::endl;
-   for (unsigned int idx=0; idx < Nmodes; ++idx)
+   for (int idx=0; idx < Nmodes; ++idx)
    {
       molden_file << "vibration" << " " << idx+1 << std::endl;
-      for (unsigned int i=0; i < Nat; ++i)
+      for (int i=0; i < Nat; ++i)
       {
          // nuclear displacements 
          molden_file << std::fixed << std::setfill(' ') << std::setw(10) << std::setprecision(4) 

@@ -59,7 +59,7 @@ void States::DestroyLastNstates(const int N)
 void States::Print() const
 {
    std::cout << "# List of excited states: energies (hartree, eV); transition electric dipole (au); transition magnetic dipole (au):" << std::endl;
-   for (unsigned int i=0; i<this->energy.size(); ++i) 
+   for (int i=0; i<this->energy.size(); ++i) 
    { 
       std::cout << "# " << i+1 << " " 
                 << this->energy(i) 
@@ -81,7 +81,7 @@ void States::Print() const
    std::cout << "# List of excited states: energies (eV); oscillatory strength (f); rotatory strength (R)" << std::endl;
    Eigen::VectorXd f = this->OscillatorStrengths(),
                    R = this->RotatoryStrengths();
-   for (unsigned int i=0; i<this->energy.size(); ++i) 
+   for (int i=0; i<this->energy.size(); ++i) 
    { 
       std::cout << "# " << i+1 << " " 
                 << this->energy(i) * EV_PER_AU 
@@ -171,7 +171,7 @@ double States::SumRule() const
 {
    double sum = 0.0;
 
-   for (unsigned int i=0; i<this->energy.size(); ++i)
+   for (int i=0; i<this->energy.size(); ++i)
    {
       // oscillator strength
       double f_i = (2.0/3.0) * this->energy[i] * this->el_dipole[i].squaredNorm(); 
@@ -184,7 +184,7 @@ Eigen::VectorXd States::OscillatorStrengths() const
 {
    int N = energy.size();
    Eigen::VectorXd f = Eigen::VectorXd::Zero(N);
-   for (unsigned int i=0; i<this->energy.size(); ++i)
+   for (int i=0; i<this->energy.size(); ++i)
    {
       // oscillator strength
       f(i) = (2.0/3.0) * this->energy[i] * this->el_dipole[i].squaredNorm(); 
@@ -196,7 +196,7 @@ Eigen::VectorXd States::RotatoryStrengths() const
 {
    int N = energy.size();
    Eigen::VectorXd R = Eigen::VectorXd::Zero(N);
-   for (unsigned int i=0; i<this->energy.size(); ++i)
+   for (int i=0; i<this->energy.size(); ++i)
    {
       // rotatory strength
       R(i) = this->mag_dipole[i].dot(this->el_dipole[i]); 
@@ -208,7 +208,7 @@ Eigen::VectorXd States::GetElectricTransitionDipoleNorm() const
 {
    int N = energy.size();
    Eigen::VectorXd mu = Eigen::VectorXd::Zero(N);
-   for (unsigned int i=0; i<this->energy.size(); ++i)
+   for (int i=0; i<this->energy.size(); ++i)
    {
       mu(i) = this->el_dipole[i].norm();
    }
@@ -219,7 +219,7 @@ Eigen::VectorXd States::GetMagneticTransitionDipoleRobustNorm() const
 {
    int N = energy.size();
    Eigen::VectorXd m = Eigen::VectorXd::Zero(N);
-   for (unsigned int i=0; i<this->energy.size(); ++i)
+   for (int i=0; i<this->energy.size(); ++i)
    {
       // unit vector along the electric transition dipole
       Eigen::Vector3d u = this->el_dipole[i] / this->el_dipole[i].norm();

@@ -63,7 +63,7 @@ public:
    void PrintReport() const;
 
    // getters
-   unsigned int GetNumberOfStates() const;
+   int GetNumberOfStates() const;
    Eigen::VectorXd              GetWavenumbers() const;
    std::vector<Eigen::Vector3d> GetElectricDipoleDerivative() const;
    std::vector<Eigen::Vector3d> GetMagneticDipoleDerivative() const;

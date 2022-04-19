@@ -42,7 +42,7 @@ VCD::VCD(const VibraSolver& vibra, const GaussianDataset& gau)
 
    // fix units and express dmu_dq, dm_dq in transition dipole moments: <0|mu|1>, <1|m|0>
    // (from atomic units to cgs units, namely esu * cm)
-   for (unsigned int id_mode=0; id_mode < 3*Nat; ++id_mode)
+   for (int id_mode=0; id_mode < 3*Nat; ++id_mode)
    {
       double mu_factor = 
 	                     ECHARGE * std::sqrt(NAV)
@@ -100,10 +100,10 @@ void VCD::ComputeElectricDipoleDerivativesVsNormalCoordinates(const VibraSolver&
    Eigen::MatrixXd  Lx = vibra.GetCartesianNuclearDisplacements();
    Eigen::MatrixXd dmu =   gau.GetElectricDipoleDerivatives();
 
-   for (unsigned int id_mode = 0; id_mode < 3*Nat; ++id_mode)
+   for (int id_mode = 0; id_mode < 3*Nat; ++id_mode)
    {
       Eigen::Vector3d dmudq = {0.0, 0.0, 0.0}; 
-      for (unsigned int id_coord=0; id_coord < 3*Nat; ++id_coord)
+      for (int id_coord=0; id_coord < 3*Nat; ++id_coord)
       {
           dmudq(0) += dmu(0,id_coord) * Lx(id_coord,id_mode);
           dmudq(1) += dmu(1,id_coord) * Lx(id_coord,id_mode);
@@ -121,10 +121,10 @@ void VCD::ComputeMagneticDipoleDerivativesVsNormalCoordinates(const VibraSolver&
    Eigen::MatrixXd  Lx = vibra.GetCartesianNuclearDisplacements();
    Eigen::MatrixXd  dm =   gau.GetMagneticDipoleDerivatives();
 
-   for (unsigned int id_mode = 0; id_mode < 3*Nat; ++id_mode)
+   for (int id_mode = 0; id_mode < 3*Nat; ++id_mode)
    {
       Eigen::Vector3d mode_dm_dqdot = {0.0, 0.0, 0.0}; 
-      for (unsigned int id_coord=0; id_coord < 3*Nat; ++id_coord)
+      for (int id_coord=0; id_coord < 3*Nat; ++id_coord)
       {
           mode_dm_dqdot(0) += dm(0,id_coord) * Lx(id_coord,id_mode);
           mode_dm_dqdot(1) += dm(1,id_coord) * Lx(id_coord,id_mode);

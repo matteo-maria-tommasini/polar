@@ -84,7 +84,7 @@ VibPolarizability::VibPolarizability(const VibStates& V,
    std::complex<double> i_gamma_half(0.0, this->gamma / 2.0);
 
    // Sum Over Vibrational States
-   for (unsigned int idx_state=0; idx_state<Nstates; ++idx_state)
+   for (int idx_state=0; idx_state<Nstates; ++idx_state)
    {
       // filter out rototranslations
       if (wavenumbers(idx_state) > 25.0)
@@ -103,7 +103,7 @@ VibPolarizability::VibPolarizability(const VibStates& V,
                               ConvertWavenumberToVibQuantumEnergyAU(off_resonance_denominator);
 
          // (i,j) terms
-         for (unsigned int i=0; i<3; ++i)
+         for (int i=0; i<3; ++i)
          {
             // dipole derivatives originating from (01) or (10) transitions
             std::complex<double> mu01_i = 
@@ -115,7 +115,7 @@ VibPolarizability::VibPolarizability(const VibStates& V,
             std::complex<double> mu10_i = std::conj(mu01_i);
             std::complex<double>  m01_i = std::conj( m10_i);
 
-            for (unsigned int j=0; j<3; ++j)
+            for (int j=0; j<3; ++j)
             {
 
                // dipole derivatives originating from (01) or (10) transitions

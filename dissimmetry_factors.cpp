@@ -40,7 +40,7 @@ DissimmetryFactors::DissimmetryFactors(const VibStates& V)
    this->dipole_strength = this->rotatory_strength = this->g = Eigen::VectorXd::Zero(Nstates); 
    
    // loop over Vibrational States
-   for (unsigned int idx_state=0; idx_state<Nstates; ++idx_state)
+   for (int idx_state=0; idx_state<Nstates; ++idx_state)
    {
       Eigen::Vector3cd mu01_idx,
                        mu10_idx,
@@ -48,7 +48,7 @@ DissimmetryFactors::DissimmetryFactors(const VibStates& V)
                         m10_idx;
 
       // individual Cartesian components 
-      for (unsigned int i=0; i<3; ++i)
+      for (int i=0; i<3; ++i)
       {
          // dipole derivatives originating from (01) or (10) transitions
          std::complex<double> mu01_i = 
@@ -89,12 +89,12 @@ void DissimmetryFactors::Print() const
    labels.push_back("dipole strengths       ( D0k x 1E4,  atomic units )");
    labels.push_back("rotatory strengths     ( R0k x 1E7,  atomic units )");
    labels.push_back("dissimmetry factors    (   g x 1E4, dimensionless )");
-   for (unsigned int i=0; i<labels.size(); ++i)
+   for (int i=0; i<labels.size(); ++i)
    {
       std::cout << "(" << i+1 << ") " << labels[i] << std::endl; 
    }
    std::cout << BAR << std::endl;
-   for (unsigned int i=0; i<labels.size(); ++i)
+   for (int i=0; i<labels.size(); ++i)
    {
       std::cout << std::fixed << std::setfill(' ') 
                 << std::setw(10) << std::setprecision(2)
@@ -106,7 +106,7 @@ void DissimmetryFactors::Print() const
    // HEADER ends //
    /////////////////
    
-   for (unsigned int i=0; i < this->g.size(); ++i)
+   for (int i=0; i < this->g.size(); ++i)
    {
       std::vector<double> values;
 
@@ -124,7 +124,7 @@ void DissimmetryFactors::Print() const
       //////////////////////////////////////////////////
       
       // print numerical data              
-      for (unsigned int k=0; k<values.size(); ++k)
+      for (int k=0; k<values.size(); ++k)
       {
          std::cout << std::fixed << std::setfill(' ') 
                    << std::setw(10) << std::setprecision(2)

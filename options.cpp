@@ -86,7 +86,7 @@ Options::Options(const int& argc, const char *argv[])
      else 
      {
 
-       for (unsigned int i = 0; i < argc; i++) 
+       for (int i = 0; i < argc; i++) 
        {
           option = argv[i];
 

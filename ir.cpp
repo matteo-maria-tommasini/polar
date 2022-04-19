@@ -34,7 +34,7 @@ IR::IR(const VibraSolver& vibra, const GaussianDataset& gau)
 
    int Nat = gau.GetNumberOfAtoms(); 
    this->intensities = Eigen::MatrixXd::Zero(3*Nat,1);
-   for (unsigned int id_mode=0; id_mode < 3 * Nat; ++id_mode)
+   for (int id_mode=0; id_mode < 3 * Nat; ++id_mode)
    {
       // dmu_dq is computed and stored in a.u. (e / A amu^1/2)
       // the factor 2.541765 / A0_RADIUS converts it in debye / (A amu^1/2)
@@ -55,10 +55,10 @@ void IR::ComputeDipoleDerivativesVsNormalCoordinates(const VibraSolver& vibra, c
    Eigen::MatrixXd  Lx = vibra.GetCartesianNuclearDisplacements();
    Eigen::MatrixXd dmu =   gau.GetElectricDipoleDerivatives();
 
-   for (unsigned int id_mode = 0; id_mode < 3*Nat; ++id_mode)
+   for (int id_mode = 0; id_mode < 3*Nat; ++id_mode)
    {
       Eigen::Vector3d dmudq = {0.0, 0.0, 0.0}; 
-      for (unsigned int id_coord=0; id_coord < 3*Nat; ++id_coord)
+      for (int id_coord=0; id_coord < 3*Nat; ++id_coord)
       {
           dmudq(0) += dmu(0,id_coord) * Lx(id_coord,id_mode);
           dmudq(1) += dmu(1,id_coord) * Lx(id_coord,id_mode);

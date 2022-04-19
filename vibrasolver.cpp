@@ -53,7 +53,7 @@ void VibraSolver::Diagonalize(const Eigen::MatrixXd& W,
 
    // Stuff below is done to sort eigen values. This can be done in other ways too.
    std::vector<std::pair<int, int>> eigen_value_index_vector;
-   for (unsigned int i = 0; i < unsorted_eigen_values.size(); ++i)
+   for (int i = 0; i < unsorted_eigen_values.size(); ++i)
    {
        eigen_value_index_vector.push_back( std::make_pair(unsorted_eigen_values[i], i));
    }
@@ -63,7 +63,7 @@ void VibraSolver::Diagonalize(const Eigen::MatrixXd& W,
 
    Eigen::RowVectorXd sorted_eigen_values(unsorted_eigen_values.cols());
    Eigen::MatrixXd sorted_eigen_vectors(unsorted_eigen_vectors.rows(), unsorted_eigen_vectors.cols());
-   for (unsigned int i = 0; i < unsorted_eigen_values.size(); ++i)
+   for (int i = 0; i < unsorted_eigen_values.size(); ++i)
    {
        // can also be eigen_value_index_vector[i].first
        sorted_eigen_values[i] = unsorted_eigen_values[eigen_value_index_vector[i].second];
@@ -83,7 +83,7 @@ void VibraSolver::SolveSecularEquation(const GaussianDataset& gau,
    Eigen::MatrixXd invM05 = Eigen::MatrixXd::Zero(3*Nat,3*Nat); 
    Eigen::MatrixXd M = Eigen::MatrixXd::Zero(3*Nat,3*Nat); 
 
-   for (unsigned int i = 0; i < Nat; ++i)
+   for (int i = 0; i < Nat; ++i)
    {
       double m05 = sqrt(mass(i));
       invM05(3*i+0,3*i+0) = 1.0 / m05;
@@ -106,13 +106,13 @@ void VibraSolver::SolveSecularEquation(const GaussianDataset& gau,
 
    // wavenumbers: initialization
    wavenumbers = Eigen::VectorXd::Zero(3*Nat); 
-   for (unsigned int i = 0; i < 3*Nat; ++i)
+   for (int i = 0; i < 3*Nat; ++i)
    {
       wavenumbers(i) = eigenvalues(i);
    }
 
    // wavenumbers: fix units and negative eigenvalues
-   for (unsigned int i = 0; i < 3*Nat; ++i)
+   for (int i = 0; i < 3*Nat; ++i)
    {
       if (wavenumbers(i) > 0.0) 
           wavenumbers(i) =  const1 * std::sqrt( wavenumbers(i));
@@ -214,13 +214,13 @@ void VibraSolver::PrintReport() const
    if (this->has_IR)     labels.push_back("IR intensity, km/mol");
    if (this->has_VCD)    labels.push_back("VCD intensity (rotatory strength), 1.0e-44 esu**2 cm**2");
    
-   for (unsigned int i=0; i<labels.size(); ++i)
+   for (int i=0; i<labels.size(); ++i)
    {
       std::cout << "(" << i+1 << ") " << labels[i] << std::endl; 
    }
    std::cout << BAR << std::endl;
 
-   for (unsigned int i=0; i<labels.size(); ++i)
+   for (int i=0; i<labels.size(); ++i)
    {
       std::cout << std::fixed << std::setfill(' ') << std::setw(10) << std::setprecision(2)
                 << i+1;
@@ -234,14 +234,14 @@ void VibraSolver::PrintReport() const
    ///////////////////////////////////
    // print data rows, mode by mode //
    ///////////////////////////////////
-   for (unsigned int i=0; i<N3; ++i)
+   for (int i=0; i<N3; ++i)
    {
                             values.push_back(this->wavenumbers(i));
       if (this->has_IR)     values.push_back(this->IR_intensities(i));
       if (this->has_VCD)    values.push_back(this->VCD_intensities(i) * 1.0e44);
       
       // final printout
-      for (unsigned int k=0; k<values.size(); ++k)
+      for (int k=0; k<values.size(); ++k)
       {
          std::cout << std::fixed << std::setfill(' ') << std::setw(10) << std::setprecision(2)
                    << values[k];
