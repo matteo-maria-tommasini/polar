@@ -55,7 +55,7 @@ void ICM::PrintReport() const
    {
       int idx = 1;
       double sum = 0.0;
-      for (unsigned int i = 0; i<this->ICM_intensity.size(); ++i)
+      for (int i = 0; i<this->ICM_intensity.size(); ++i)
       {
          if (abs(ICM_intensity(i)) > 1.0e-6) 
          {
@@ -115,11 +115,11 @@ ICM::ICM(const GaussianDataset& gau, const std::string& kind_of_calculation)
          int Nat3 = dmu.cols();
          // allocate and form the M-matrix
          M = Eigen::MatrixXd::Zero(Nat3,Nat3);
-         for (unsigned int i = 0; i < Nat3; ++i)
+         for (int i = 0; i < Nat3; ++i)
          {
-            for (unsigned int j = 0; j < Nat3; ++j)
+            for (int j = 0; j < Nat3; ++j)
             {
-               for (unsigned int k = 0; k < 3; ++k)
+               for (int k = 0; k < 3; ++k)
                {
                   M(i,j) += dmu(k,i) * dmu(k,j);
                }
