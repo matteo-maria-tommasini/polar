@@ -34,7 +34,7 @@ void ICM::PrintReport() const
    {
       int idx = 1;
       double sum = 0.0;
-      for (Eigen::VectorXd::size_type i = 0; i<this->ICM_intensity.size(); ++i)
+      for (int i = 0; i<this->ICM_intensity.size(); ++i)
       {
          if (abs(ICM_intensity(i)) > 1.0e-6) 
          {
